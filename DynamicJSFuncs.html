@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Library</title>
+    <link rel="stylesheet" href="prism/prism.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<style>
+    .navbar, #sidebar{
+        background-color: #4b4646;
+    }
+    #sidebar{
+        height : 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;    
+    }
+    .navItem{
+        color: #fff;  
+        padding: 5px 0;  
+    }
+    .navItem a,.pageNav a{
+        text-decoration: none;
+        color: #fff;
+        background: transparent;
+        border-radius: 3px;
+    }
+    .navItem a:hover, .pageNav a:hover{
+        color: #392b2b;
+        background: #ffffff;
+        transition: 0.4s;
+    }
+    .TutorialContainer{
+        border-bottom: 5px double #000;
+    }
+    .active{
+        border-bottom: 2px solid #fff;
+    }
+    .nav-item{
+        margin: 0 6px;
+    }
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand px-2" href="#">CRM Collab</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Out Of Box</a>
+              </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="DynamicJSFuncs.html">Dyn JS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">C#</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-3 py-3 mt-5" id="sidebar">
+                <p class="navItem">| Dynamic JS Functions</p>
+                <ol>
+                    <li class="navItem"><a href="DynamicJSFuncs.html#depOptionSet">Dependant Option Set</a></li>
+                    <li class="navItem"><a href="DynamicJSFuncs.html#fieldVisOptSet">Fields Visibility Depends on Option Set Value</a></li>
+                    <li class="navItem"><a href="DynamicJSFuncs.html#fieldVisOptSetBPF">Fields Visibility Depends on Option Set Value and Business Process Flow Stage</a></li>
+                    <li class="navItem"><a href="DynamicJSFuncs.html#multiQueriesField">Search for field in Multiple Entities</a></li>
+                </ol>
+
+            </div>
+            <div class="col-3"><!-- Place Holder --></div>         
+            <div class="col-9 mt-5">
+                <h1 class="text-center">CRM JS Library</h1>
+                <h5 class="text-center">&copy; Hamed Serag</h6>
+                <!-- Tutorial 1 -->
+                <div class="col-12 pt-5 TutorialContainer" id="depOptionSet">
+                    <h3 class="mt-5">Dependant Option Set</h3>
+                    <p>
+                        Sequence : You have an option set that has fields dependant on the choice of another option set 
+                        <br>
+                        The inputs needed for the function are : 
+                        <ol>
+                            <li>Execution Context : Which is a CRM Parameter Passed from the event settings</li>
+                            <li>Option Map : Dictionary with the key as the item value of the option set and the dictionary value is the array that has the behaviour of each element in the other option set </li>
+                            <pre class="language-js p-1">
+{
+    1 : [true, true, false, false],
+    2 : [false, false, true, true]
+}</pre>
+                            <li>Main Option Set Schema Name : the schema name for the first option set</li>
+                            <pre class="language-js p-1">"new_customertype"</pre>
+                            <li>Dependant Option Set Schema Name : the schema name for the second option set</li>
+                            <pre class="language-js p-1">"new_casetype"</pre>
+                        </ol>
+                        <p>Full Input Example :</p>
+                        <pre class="language-js p-1">
+{1 : [true, true, false, false],2 : [false, false, true, true]},"new_customertype","new_casetype"</pre>
+                    </p>
+                    <pre>
+<code class="language-js line-numbers">var optionsReference = [];
+    function depOptSet(executionContext, optionMap, mainOptionSchemaName, dependantOptionSchemaName){
+        debugger;
+        var formContext = executionContext.getFormContext();
+        const casetype = new Field(formContext, dependantOptionSchemaName);
+        var options;
+        if(optionsReference.length < 1){
+            options = casetype.attribute.getOptions();
+            optionsReference = options; 
+
+        }else{
+            options = optionsReference;
+        }
+        var customerType = formContext.getAttribute(mainOptionSchemaName).getValue();
+        
+        for (let i = 0; i < optionMap[customerType].length; i++) {
+            casetype.control.removeOption(options[i]["value"]);
+        }
+        for (let i = 0; i < optionMap[customerType].length; i++) {
+            if(optionMap[customerType][i]){
+                casetype.control.addOption(options[i]);
+            }
+        }
+    }</code>
+                    </pre>
+                </div>
+                <!-- Tutorial 2 -->
+                <div class="col-12 pt-5 TutorialContainer" id="fieldVisOptSet">
+                    <h3 class="mt-5">Control Fields Visibility on the value of an option set </h3>
+                    <p>
+                        Sequence : You have fields that has their visibilty dependant on the choice of an option set
+                        <br>
+                        The inputs needed for the function are : 
+                        <ol>
+                            <li>Execution Context : Which is a CRM Parameter Passed from the event settings</li>
+                            <li>Controls Map : Dictionary with the key as the schema name of the field to Show/Hide and the dictionary value is an array that has the behaviours of the field 
+                                <span class="text-danger"> All Arrays in the dictionary values need to be the same size (N) </span>
+                            </li>
+                            <pre class="language-js p-1">
+    var controlsMap = {
+        "new_cardnumber" : [true,false,false],
+        "new_oldaddress" : [false,true,false],
+        "new_newaddress" : [false,true,false],
+        "new_oldcr" :      [false,false,true],
+        "new_newcr" :      [false,false,true]
+    }
+</pre>
+                            <li>Option Set Index Map : Dictionary with the key as the option set value and the dictionary value is the index of the behaviour in the control map for the option field
+                                <span class="text-danger"> Values of the dictionary must all exist within the bounds of behaviour array with size (N) </span>
+                            </li>
+                            <pre class="language-js p-1">
+    var optionsetIndexMap = {
+        1 : 0,
+        2 : 0,
+        3 : 1,
+        4 : 2
+    }
+</pre>
+                            <li>Decision Maker Schema Name : the schema name for the option set</li>
+                            <pre class="language-js p-1">"new_casetype"</pre>
+                        </ol>
+                        <p>Full Input Example :</p>
+                        <pre class="language-js p-1">
+{"new_cardnumber":[true,false,false],"new_oldaddress":[false,true,false],"new_newaddress":[false,true,false],"new_oldcr":[false,false,true],"new_newcr":[false,false,true]},{1:0,2:0,3:1,4:2},"new_casetype"</pre>
+                    </p>
+                    <pre>
+<code class="language-js line-numbers" data-prismjs-copy="Copy">function depFieldsOnOptSet(executionContext,controlsMap,optionsetIndexMap,decisionMakerSchemaName){
+        var formContext = executionContext.getFormContext();
+        var createdon = formContext.getAttribute("createdon");
+        var controls = [];
+        var decisionMaker = optionsetIndexMap[formContext.getAttribute(decisionMakerSchemaName).getValue()];
+        
+        for (const key of Object.keys(controlsMap)) {
+            controls.push({ 
+                "schema_name" : key , 
+                "control" : formContext.getControl(key) , 
+                "attribute" : formContext.getAttribute(key) 
+            });
+        }
+        
+        for (let i = 0; i < controls.length; i++) {
+            controls[i]["control"].setVisible(controlsMap[controls[i]["schema_name"]][decisionMaker]);
+        }
+        
+        for (let i = 0; i < controls.length; i++) {
+            var requirementLevel = controlsMap[controls[i]["schema_name"]][decisionMaker] ? "required" : "none";
+            controls[i]["attribute"].setRequiredLevel(requirementLevel);
+        }
+    }</code>
+                    </pre>
+                </div>
+                <!-- Tutorial 3 -->
+                <div class="col-12 pt-5 TutorialContainer" id="fieldVisOptSetBPF">
+                    <h3 class="mt-5">Control Fields Visibility on the value of an option set </h3>
+                    <h5>Dependant on business process flow stage</h5>
+                    <p>
+                        Sequence : You have fields that has their visibilty dependant on the choice of an option set, as well as the function is stage dependant on business process flow 
+                        <br>
+                        The inputs needed for the function are : 
+                        <ol>
+                            <li>Execution Context : Which is a CRM Parameter Passed from the event settings</li>
+                            <li>Controls Map : Dictionary with the key as the schema name of the field to Show/Hide and the dictionary value is an array that has the behaviours of the field 
+                                <span class="text-danger"> All Arrays in the dictionary values need to be the same size (N) </span>
+                            </li>
+                            <pre class="language-js p-1">
+    var controlsMap = {
+        "new_cardnumber" : [true,false,false],
+        "new_oldaddress" : [false,true,false],
+        "new_newaddress" : [false,true,false],
+        "new_oldcr" :      [false,false,true],
+        "new_newcr" :      [false,false,true]
+    }
+</pre>
+                            <li>Option Set Index Map : Dictionary with the key as the option set value and the dictionary value is the index of the behaviour in the control map for the option field
+                                <span class="text-danger"> Values of the dictionary must all exist within the bounds of behaviour array with size (N) </span>
+                            </li>
+                            <pre class="language-js p-1">
+    var optionsetIndexMap = {
+        1 : 0,
+        2 : 0,
+        3 : 1,
+        4 : 2
+    }
+</pre>
+                            <li>Decision Maker Schema Name : the schema name for the option set</li>
+                            <pre class="language-js p-1">"new_casetype"</pre>
+                            <li>Required Stage Keyword : a word subset from the name of the business process flow stages</li>
+                            <pre class="language-js p-1">"Additional"</pre>
+                        </ol>
+                    </p>
+                    <pre class="language-js p-1">
+{"new_cardnumber":[true,false,false],"new_oldaddress":[false,true,false],"new_newaddress":[false,true,false],"new_oldcr":[false,false,true],"new_newcr":[false,false,true]},{1:0,2:0,3:1,4:2},"new_casetype","Additional"</pre>
+                    <pre>
+<code class="language-js line-numbers" data-prismjs-copy="Copy">function depFieldsOnOptSet(executionContext,controlsMap,optionsetIndexMap,decisionMakerSchemaName,requiredStageKeyword){
+        var formContext = executionContext.getFormContext();
+        var createdon = formContext.getAttribute("createdon");
+        var controls = [];
+        var decisionMaker = optionsetIndexMap[formContext.getAttribute(decisionMakerSchemaName).getValue()];
+        
+        for (const key of Object.keys(controlsMap)) {
+            controls.push({ 
+                "schema_name" : key , 
+                "control" : formContext.getControl(key) , 
+                "attribute" : formContext.getAttribute(key) 
+            });
+        }
+        
+        for (let i = 0; i < controls.length; i++) {
+            controls[i]["control"].setVisible(controlsMap[controls[i]["schema_name"]][decisionMaker]);
+        }
+        
+        var requireAdditional = false
+        if(formContext.data.process.getActiveStage().getName().includes(requiredStageKeyword) && createdon.getValue()){
+            requireAdditional = true;
+        }
+        
+        if(requireAdditional){
+            for (let i = 0; i < controls.length; i++) {
+                var requirementLevel = controlsMap[controls[i]["schema_name"]][decisionMaker] ? "required" : "none";
+                controls[i]["attribute"].setRequiredLevel(requirementLevel);
+            }
+        }
+    }</code>
+                    </pre>
+                </div>
+                <!-- Tutorial 4 -->
+                <div class="col-12 pt-5 TutorialContainer" id="multiQueriesField">
+                    <h3 class="mt-5">Search for field in Multiple Entities </h3>
+                    <p>
+                        Sequence : You have a lookup field that can have multiple entities <span class="text-secondary">ex : (Contact / Account)</span> 
+                        and you need to fetch the a field from the related entity <span class="text-secondary">ex : (Email)</span> so you search the entities for the wanted field and fill the fetched data in the current form field
+                        <br>
+                        The inputs needed for the function are : 
+                        <ol>
+                            <li>Execution Context : Which is a CRM Parameter Passed from the event settings</li>
+                            <li>Entites : Array for the names of the entities that the function will query and search in them
+                                
+                            </li>
+                            <pre class="language-js p-1">
+    ["account","contact"]</pre>
+                            <li>Entites ID Fields : Array for the schema names of the ID fields of the entities
+                                
+                            </li>
+                            <pre class="language-js p-1">
+    ["accountid","contactid"]</pre>
+                            <li>Current Entity : required variable for the recursive call
+                                <span class="text-danger"> Must Be Zero (The function uses it to move across the entities)</span>
+                            </li>
+                            <pre class="language-js p-1">
+    0 </pre>
+                            <li>Entities GET Fields : the fields that the query will target in each entity to fetch the value of it
+                                
+                            </li>
+                            <pre class="language-js p-1">
+    ["emailaddress1", "emailaddress1"] </pre>
+                            <li>Form Filled Field Schema Name : the field in the active form that the queries will fill after they finish
+                                
+                            </li>
+                            <pre class="language-js p-1">
+    "emailaddress" </pre>
+                            <li>Lookup Field Schema Name: the field where it has the id of the record
+    
+                            </li>
+                            <pre class="language-js p-1">
+    "customerid"</pre>
+                        </ol>
+                    </p>
+                    <p class="text-danger"> All Input Arrays <span class="text-secondary">Entites, Entites ID Fields, Entities GET Fields</span> must have the same length (N)</p>
+                    <pre>
+<code class="language-js line-numbers" data-prismjs-copy="Copy">function multiQueriesField(executionContext,entities,entitiesIdField,curEnt,entitiesGetField,formFilledFieldName,filledField){
+        debugger;
+        var entity = entities[curEnt];
+        var entityIdField = entitiesIdField[curEnt];
+        var entityGetField = entitiesGetField[curEnt];
+    
+        var formContext = executionContext.getFormContext();
+        var id = formContext.getAttribute(filledField).getValue();
+        if(id == null){
+            console.log("Empty Trigger Field", filledField);
+            return;
+        }
+        id = id[0].id.replace("{","").replace("}","");
+        var query = '?$select=' + entityGetField + '&$filter=' + entityIdField + ' eq ' + id;
+        Xrm.WebApi.retrieveMultipleRecords(entity, query).then(retrievecaseCallBack, errorHandler);
+    
+        function retrievecaseCallBack(results){
+            if(results.entities.length > 0){
+                console.log("Success",entity, results);
+                formContext.getAttribute(formFilledFieldName).setValue(results.entities[0][entityGetField]);
+            }else{
+                console.log("Initiating Other Entity", results);
+                curEnt++; // next ent
+                if(curEnt>= entities.length){
+                    console.log("Searched All Entities & Found Nothing.");
+                    return;
+                }
+                multiQueriesField(executionContext,entities,entitiesIdField,curEnt,entitiesGetField,formFilledFieldName,filledField);
+            }
+        }
+    
+        function errorHandler(error){
+            console.log(error);
+        }
+    }</code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="prism/prism.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</html>
+
