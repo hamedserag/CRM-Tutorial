@@ -6,45 +6,11 @@
     <title>CRM Library</title>
     <link rel="stylesheet" href="prism/prism.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="global.css">
 </head>
-<style>
-    .navbar, #sidebar{
-        background-color: #4b4646;
-    }
-    #sidebar{
-        height : 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;    
-    }
-    .navItem{
-        color: #fff;  
-        padding: 5px 0;  
-    }
-    .navItem a,.pageNav a{
-        text-decoration: none;
-        color: #fff;
-        background: transparent;
-        border-radius: 3px;
-    }
-    .navItem a:hover, .pageNav a:hover{
-        color: #392b2b;
-        background: #ffffff;
-        transition: 0.4s;
-    }
-    .TutorialContainer{
-        border-bottom: 5px double #000;
-    }
-    .active{
-        border-bottom: 2px solid #fff;
-    }
-    .nav-item{
-        margin: 0 6px;
-    }
-</style>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <a class="navbar-brand px-2" href="#">CRM Collab</a>
+        <a class="navbar-brand px-2" href="index.html">CRM Collab</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -57,7 +23,7 @@
               <a class="nav-link" href="DynamicJSFuncs.html">Dyn JS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">C#</a>
+                <a class="nav-link" href="csharp.html">C# Basic How To</a>
             </li>
           </ul>
         </div>
@@ -349,10 +315,29 @@
     }</code>
                     </pre>
                 </div>
+
+
+                <footer>
+                    <div class="container copyright mt-3">
+                        <p class="text-secondary">
+                            © 2023 Collaborators. All rights reserved.
+                            The materials in this GitHub repository, including tutorials for CRM Dynamics and custom functions, are intended solely for educational purposes. This collaborative effort involves the contributions of the following individuals:
+                        </p>
+                        <ul class="text-secondary">
+                            <li>Hamed Serag - eng.hamedserag@gmail.com</li>
+                        </ul>
+                        <p class="text-secondary">
+                            You are free to use, modify, and distribute these materials for non-commercial and educational purposes, with proper attribution to the original source and acknowledgment of the collaborative contributors. However, the materials are provided "as-is," without any warranty or support. Hamed Serag and the collaborators shall not be liable for any damages or issues arising from the use of these materials.
+                            For commercial use or any inquiries regarding permissions beyond the scope of this license, please contact on of the collaborators.
+                        </p>        
+                    </div>
+                </footer>
+
             </div>
         </div>
     </div>
 </body>
+
 <script src="prism/prism.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </html>

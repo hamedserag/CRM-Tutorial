@@ -1,0 +1,33 @@
+.navbar, #sidebar{
+    background-color: #4b4646;
+}
+#sidebar{
+    height : 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;    
+}
+.navItem{
+    color: #fff;  
+    padding: 5px 0;  
+}
+.navItem a,.pageNav a{
+    text-decoration: none;
+    color: #fff;
+    background: transparent;
+    border-radius: 3px;
+}
+.navItem a:hover, .pageNav a:hover{
+    color: #392b2b;
+    background: #ffffff;
+    transition: 0.4s;
+}
+.TutorialContainer{
+    border-bottom: 5px double #000;
+}
+.active{
+    border-bottom: 2px solid #fff;
+}
+.nav-item{
+    margin: 0 6px;
+}
