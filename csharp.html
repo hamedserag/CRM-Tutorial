@@ -43,32 +43,31 @@
             <div class="col-3 py-3 mt-5" id="sidebar">
                 <p class="navItem">| C# Basic HOW TO <sup>Visual Studio 2019</sup></p>
                 <ol>
-                    <li class="navItem"><a href="#">Plugins</a></li>
-                    <li class="navItem"><a href="#">Custom Workflows</a></li>
-                    <li class="navItem"><a href="#">Custom Action</a></li>
-                    <li class="navItem"><a href="#">REST Api</a></li>
-                    <li class="navItem"><a href="#">SOAP Api</a></li>
+                    <li class="navItem"><a href="csharp.html#basicPlugin">Basic Plugin Steps</a></li>
+                    <li class="navItem"><a href="csharp.html#basicPluginCode">Basic Plugin Code Explaination</a></li>
+                    <li class="navItem"><a href="csharp.html#customWorkflow">Custom Workflows</a></li>
+                    <li class="navItem"><a href="csharp.html#customAction">Custom Action</a></li>
+                    <li class="navItem"><a href="csharp.html#RESTApi">REST Api</a></li>
+                    <li class="navItem"><a href="csharp.html#SOAPApi">SOAP Api</a></li>
                 </ol>
 
             </div>
             <div class="col-3"><!-- Place Holder --></div>         
             <div class="col-9 mt-5">
                 <h1 class="text-center">CRM C# Tutorial</h1>
-                <h5 class="text-center">&copy; Hamed Serag</h6>
                 <!-- Tutorial 1 -->
-                <div class="col-12 pt-5 TutorialContainer" id="depOptionSet">
+                <div class="col-12 pt-5 TutorialContainer" id="basicPlugin">
                     <h3 class="mt-5">Basic Plugin</h3>
-                    <p>
-                        <ol>
-                            <li>Open Visual Studio and Create a new <span class="important">Class Library (.Net Framework)</span></li>
-                            <li>Target Framework 4.7.1 <sub class="text-secondary">can work with other versions but this version is the one that the tutorial uses</sub></li>
-                            <img class="tutImg" src="media/csharp/bp01.png" alt="">
-                            <li><span class="text-warning">(Optional)</span> from the right explorer panel change the name of the class to a more meaningful name than <span class="important">class1.cs</span></li>
-                            <li>Right click the project from the right panel and click Manage Nuget Packages</li>
-                            <img class="tutImg" src="media/csharp/bp02.png" alt="">
-                            <li>Search for <span class="important">Microsoft.CrmSdk.CoreAssemblies</span> and install it</li>
-                            <li>Copy this code</li>
-                            <pre><code class="language-csharp line-numbers">using System;
+                    <ol>
+                        <li>Open Visual Studio and Create a new <span class="important">Class Library (.Net Framework)</span></li>
+                        <li>Target Framework 4.7.1 <sub class="text-secondary">can work with other versions but this version is the one that the tutorial uses</sub></li>
+                        <img class="tutImg" src="media/csharp/bp01.png" alt="">
+                        <li><span class="text-warning">(Optional)</span> from the right explorer panel change the name of the class to a more meaningful name than <span class="important">class1.cs</span></li>
+                        <li>Right click the project from the right panel and click Manage Nuget Packages</li>
+                        <img class="tutImg" src="media/csharp/bp02.png" alt="">
+                        <li>Search for <span class="important">Microsoft.CrmSdk.CoreAssemblies</span> and install it</li>
+                        <li id="pluginCodeRef">Copy this code, Code Explaination <a href="#pluginCodeExplaination">Here</a></li>
+                        <pre><code class="language-csharp line-numbers">using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -98,43 +97,99 @@ namespace Plugin_Tutorial
         }
     }
 }</code></pre>
-                            <li>Right Click Project > Properties > Signing</li>
-                            <li>mark <span class="important">Sign The Assembly</span> True</li>
-                            <li>Click on the dropdown menu and click new</li>
-                            <li>Choose a strong unique name for the key file, disable password and click OK</li>
-                            <li>Build The Project</li>
-                            <li>Right click the project and select <span class="important">Open Folder in File Explorer</span></li>
-                            <li>Navigate to bin > Debug</li>
-                            <li>Find the dll file with your class name <span class="important">class1.dll</span> <span class="text-success important">You will use this file directory in the registration</span></li>
-                            <li><span class="text-warning">(One-Time)</span> Download Plugin Registration Tool or XRM Tools and download from it Plugin Registration Tool</li>
-                            <li>Connect the plugin Registration tool to your environment</li>
-                            <li>Click Register > Register New Assembly</li>
-                            <img class="tutImg" src="media/csharp/bp03.png" alt="">
-                            <li>Load The assembly file then click register selected plugins</li>
-                            <img class="tutImg" src="media/csharp/bp04.png" alt="">
-                            <li>Create a new step</li>
-                        </ol> 
-                    </p>
-                
-
-
-            
-            </div>
-            <footer>
-                <div class="container copyright mt-3">
-                    <p class="text-secondary">
-                        © 2023 Collaborators. All rights reserved.
-                        The materials in this GitHub repository, including tutorials for CRM Dynamics and custom functions, are intended solely for educational purposes. This collaborative effort involves the contributions of the following individuals:
-                    </p>
-                    <ul class="text-secondary">
-                        <li>Hamed Serag - eng.hamedserag@gmail.com</li>
-                    </ul>
-                    <p class="text-secondary">
-                        You are free to use, modify, and distribute these materials for non-commercial and educational purposes, with proper attribution to the original source and acknowledgment of the collaborative contributors. However, the materials are provided "as-is," without any warranty or support. Hamed Serag and the collaborators shall not be liable for any damages or issues arising from the use of these materials.
-                        For commercial use or any inquiries regarding permissions beyond the scope of this license, please contact on of the collaborators.
-                    </p>        
+                        <li>Right Click Project > Properties > Signing</li>
+                        <li>mark <span class="important">Sign The Assembly</span> True</li>
+                        <li>Click on the dropdown menu and click new</li>
+                        <li>Choose a strong unique name for the key file, disable password and click OK</li>
+                        <li>Build The Project</li>
+                        <li>Right click the project and select <span class="important">Open Folder in File Explorer</span></li>
+                        <li>Navigate to bin > Debug</li>
+                        <li>Find the dll file with your class name <span class="important">class1.dll</span> <span class="text-success important">You will use this file directory in the registration</span></li>
+                        <li><span class="text-warning">(One-Time)</span> Download Plugin Registration Tool or XRM Tools and download from it Plugin Registration Tool</li>
+                        <li>Connect the plugin Registration tool to your environment</li>
+                        <li>Click Register > Register New Assembly</li>
+                        <img class="tutImg" src="media/csharp/bp03.png" alt="">
+                        <li>Load The assembly file then click register selected plugins</li>
+                        <img class="tutImg" src="media/csharp/bp04.png" alt="">
+                        <li>Navigate to your newly registered assembly in the XRM plugin registration tool</li>
+                        <li>Right click on the file inside the assembly package then click register new step</li>
+                        <img class="tutImg" src="media/csharp/bp05.png" alt="">
+                        <li>Select the message (Event Trigger) that is right for your plugin</li>
+                        <li>Select the entity that is related to the selected message (Event Trigger)</li>
+                        <li>Click Register New Step</li>
+                        <img class="tutImg" src="media/csharp/bp06.png" alt="">
+                        <li>Test The Plugin in your environment</li>
+                        <p class="text-secondary">if the step message is Create and the entity is Contact then go create a new contact and the plugin code should run and provide you with the defined logic</p>
+                        <li>Sample DLL File : <a href="media/Plugin Tutorial.dll" download>Download</a></li>
+                    </ol> 
                 </div>
-            </footer>
+                <!-- Tutorial 2 -->
+                <div class="col-12 pt-5 TutorialContainer" id="basicPluginCode">
+                    <h3 class="mt-5" id="pluginCodeExplaination">Basic Plugin Code Explaination</h3>
+                    <p>The Refered Code is from <a href="#pluginCodeRef">Here</a></p>
+                    <p>This Represents the used libraries, you could add on them what is needed for your own projects</p>
+<pre><code class="language-csharp">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Xrm.Sdk;</code></pre>
+<p>Your class needs to inherit the IPlugin interface to be able to run the plugin functions</p>
+<pre><code class="language-csharp">public class PluginTutorialAddTask : IPlugin</code></pre>
+<p>The Plugin Main function, the first one to get called</p>
+<pre><code class="language-csharp">public void Execute(IServiceProvider serviceProvider)</code></pre>
+<p>Here, you're creating an instance of the ITracingService interface. In CRM Dynamics plugins, the tracing service is used for logging or tracing messages during plugin execution. The serviceProvider.GetService method is used to retrieve an instance of the specified service type (in this case, ITracingService) from the service provider.</p>
+<pre><code class="language-csharp">ITracingService tracingService = (ITracingService)serviceProvider.GetService(typeof(ITracingService));</code></pre>
+<p>This line creates an instance of the IPluginExecutionContext interface. The plugin execution context provides information about the current execution of the plugin, including details about the event that triggered the plugin and the data associated with the event.</p>
+<pre><code class="language-csharp">IPluginExecutionContext context = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));</code></pre>
+<p>Here, you're creating an instance of the IOrganizationServiceFactory interface. The organization service factory is responsible for creating instances of the IOrganizationService, which is used to interact with the CRM Dynamics service.</p>
+<pre><code class="language-csharp">IOrganizationServiceFactory serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));</code></pre>
+<p>Here, you create an instance of the IOrganizationService interface. This service allows you to perform operations, such as creating, updating, retrieving, and deleting records in the CRM Dynamics organization. The service is created using the CreateOrganizationService method of the organization service factory, and it's associated with the user ID from the plugin execution context.</p>
+<pre><code class="language-csharp">IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);</code></pre>
+<p>This line checks for the target entity wether it exists or not</p>
+<pre><code class="language-csharp">if (context.InputParameters.Contains("Target") && context.InputParameters["Target"] is Entity)</code></pre>
+<p>this code creates a new task with placeholder subject and description then saves it the crm database</p>
+<pre><code class="language-csharp">Entity task = new Entity("task");
+task["subject"] = "Task Subject (Plugin)";
+task["description"] = "Task Description (Plugin)";
+service.Create(task);</code></pre>
+
+                </div>
+                <!-- Tutorial 3 -->
+                <div class="col-12 pt-5 TutorialContainer" id="customWorkflow">
+                    <h3 class="mt-5">Custom Workflow</h3>
+                    
+                </div>
+                <!-- Tutorial 4 -->
+                <div class="col-12 pt-5 TutorialContainer" id="customAction">
+                    <h3 class="mt-5">Custom Action</h3>
+                    
+                </div>
+                <!-- Tutorial 5 -->
+                <div class="col-12 pt-5 TutorialContainer" id="RESTApi">
+                    <h3 class="mt-5">REST Api</h3>
+                    
+                </div>
+                <!-- Tutorial 6 -->
+                <div class="col-12 pt-5 TutorialContainer" id="SOAPApi">
+                    <h3 class="mt-5">SOAP Api</h3>
+                    
+                </div>
+                <footer>
+                    <div class="container copyright mt-3">
+                        <p class="text-secondary">
+                            © 2023 Collaborators. All rights reserved.
+                            The materials in this GitHub repository, including tutorials for CRM Dynamics and custom functions, are intended solely for educational purposes. This collaborative effort involves the contributions of the following individuals:
+                        </p>
+                        <ul class="text-secondary">
+                            <li>Hamed Serag - eng.hamedserag@gmail.com</li>
+                        </ul>
+                        <p class="text-secondary">
+                            You are free to use, modify, and distribute these materials for non-commercial and educational purposes, with proper attribution to the original source and acknowledgment of the collaborative contributors. However, the materials are provided "as-is," without any warranty or support. Hamed Serag and the collaborators shall not be liable for any damages or issues arising from the use of these materials.
+                            For commercial use or any inquiries regarding permissions beyond the scope of this license, please contact on of the collaborators.
+                        </p>        
+                    </div>
+                </footer>
         </div>
     </div>
 </body>
