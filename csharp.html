@@ -162,10 +162,86 @@ service.Create(task);</code></pre>
                     <h3 class="mt-5">Custom Workflow</h3>
                     
                 </div>
-                <!-- Tutorial 4 -->
-                <div class="col-12 pt-5 TutorialContainer" id="customAction">
+                 <!-- Tutorial 4 -->
+                 <div class="col-12 pt-5 TutorialContainer" id="customAction">
                     <h3 class="mt-5">Custom Action</h3>
+                    <p>One of the important types of Custom activity is Code Activity which enahble you to write custom logic directely 
+                        into the workflow without having to create a separate class for the activity.They are useful for implementing 
+                        specific functionality that cannot be easily 
+                        achieved using the standard activities provided by WF.</p>
+                    <h3 class="mt-5" id="CustomAction">Some tips on custom action</h3>
+                    <p>To make a code activity your class should implement <mark>CodeActivity</mark> as follows: </p>
+                    <pre><code class="language-csharp">public class CodeActivityTutorial : CodeActivity</code></pre>
+                    <p>Since you implemented CodeActivity then you should override it's function Execute and pass the <mark>CodeActivityContext</mark> to it.</p>
+                    <pre><code class="language-csharp">protected override void Execute(CodeActivityContext executionContext){}</code></pre>
+                    <h6>Some lines you can write inside Execute function that will help in retrieving information: </h6>
+                    <pre><code class="language-csharp">IWorkflowContext context = executionContext.GetExtension<IWorkflowContext>();</code></pre>
+                    <p>You can use this line to: </p>
+                    <ol>
+                        <li>Access execution details: 
+                            <ul>
+                                <li>Retrieve information about the user triggering the workflow.</li>
+                                <li>Enabling you to personalize the workflow behavior based on the user's role or permissions</li>
+                            </ul>
+                        </li>
+                        <li>Modify Workflow Behavior:
+                            <ul>
+                                <li>Use the input information to change how the workflow works depending on the data you have.</li>
+                                <li>Allowing you to create special actions depending on the particular information provided.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <pre><code class="language-csharp">var serviceFactory = executionContext.GetExtension<IOrganizationServiceFactory>();
+var service = serviceFactory.CreateOrganizationService(context.InitiatingUserId);</code></pre>
                     
+                    <p>Those two lines help in getting the tools that you will use to <mark>Create, Update, Delete</mark> a record. It can also help 
+                        in retrieving data, executing business logic, or triggering workflows and processes.</p>
+                    <h6>Input and output parameters:</h6>
+                    <pre><code class="language-csharp">[RequiredArgument]
+[Input("Name")]
+public InArgument<string> Name { get; set; }</code></pre>
+                    <p>This is an example of input argument where we take string (name) as input and it's required to enter it.</p>
+                    <pre><code class="language-csharp">[Output("Description")]
+public OutArgument<string> Description { get; set; }</code></pre>
+                    <p>This is an example of output argument</p>
+                    <h6>Here is an example that will show the usage of what we discussed: </h6>
+                    <pre data-line="21,24,27,30"><code class="language-csharp line-numbers">
+public class CodeActivityTutorial : CodeActivity
+{
+    [RequiredArgument]
+    [Input("Name")]
+    public InArgument<string> Name { get; set; }
+
+    [RequiredArgument]
+    [Input("Related Account")]
+    [ReferenceTarget("account")]
+    public InArgument<EntityReference> relatedAccount { get; set; }
+
+    [Output("Description")]
+    public OutArgument<string> Description { get; set; }
+
+    protected override void Execute(CodeActivityContext executionContext)
+    {
+        IWorkflowContext context = executionContext.GetExtension<IWorkflowContext>();            
+        var serviceFactory = executionContext.GetExtension<IOrganizationServiceFactory>();
+        var service = serviceFactory.CreateOrganizationService(context.InitiatingUserId);
+
+        // Get the user name
+        string name = Name.Get(executionContext);
+
+        // Get the account name from the lookup field 
+        EntityReference relatedAccountName = relatedAccount.Get(executionContext);
+
+        // Get the value of the optionSet field
+        int poiTypeValue=poiType.Get<OptionSetValue>(executionContext).Value;
+
+        //Prepare the output string that will appeare in the description field
+        string descriptionOutput = "Record is deactivated. Name: " + name + ", Related Account: " + relatedAccountName.Name
+        +"Poi Type Value = " + poiTypeValue ;
+
+        this.Description.Set(executionContext, descriptionOutput);
+    }
+}</code></pre>
                 </div>
                 <!-- Tutorial 5 -->
                 <div class="col-12 pt-5 TutorialContainer" id="RESTApi">
