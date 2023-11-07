@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Library</title>
+    <link rel="stylesheet" href="prism/prism.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="resources/global.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand px-2" href="index.html">CRM Collab</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="outOfBox.html">Out Of Box</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="DynamicJSFuncs.html">Dyn JS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="csharp.html">C# Basic How To</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-3 py-3 mt-5" id="sidebar">
+                <p class="navItem">| Out Of The Box Tools</p>
+                <ol>
+                    <li class="navItem"><a href="outOfBox.html#SLAs">SLAs</a></li>   
+                    <li class="navItem"><a href="outOfBox.html#wf">WorkFlows</a></li>
+                    <li class="navItem"><a href="outOfBox.html#wf">Business Process Flow</a></li>   
+                    <li class="navItem"><a href="outOfBox.html#act">Actions</a></li>   
+                    <li class="navItem"><a href="outOfBox.html#busrule">Business Rule</a></li>   
+                    <li class="navItem"><a href="outOfBox.html#webjs">Web Resources - JS</a></li>    
+                    <li class="navItem"><a href="outOfBox.html#secrole">Security Roles</a></li>   
+                    <li class="navItem"><a href="outOfBox.html#doctemp">Document Templates</a></li>
+                    <li class="navItem"><a href="outOfBox.html#routers">Routing Rule Set</a></li>
+                </ol>
+            </div>
+            <div class="col-3"><!-- Place Holder --></div>         
+            <div class="col-9 mt-5">
+                <h1 class="text-center">CRM Out Of The Box Tools</h1>
+                <!-- Tutorial 1 -->
+                <div class="col-12 pt-5 TutorialContainer" id="SLAs">
+                    <h3 class="mt-5">Service Level Agreements (SLAs)</h3>
+                    <ol>
+                        <li>Create a SLA KPI first</li>
+                        <li>Activate SLA KPI</li>
+                        <li>Create SLA</li>
+                        <li>Create SLA Items for each condition needed</li>
+                        <p class="text-secondary">ex : for cases complaint, request and inquiry create an SLA item for each one</p>
+                        <li>Create the applying conditions and success conditions for the SLA Item</li>
+                        <li>Click on configure action and provide configuration for the needed behaviour in Power Automate</li>
+                        <h5>Apply Custom Timer</h5>
+                        <li>Go to the form that is related to the SLA</li>
+                        <li>Create a sub grid</li>
+                        <li>in the sub grid settings data source section choose</li>
+                        <ul>
+                            <li>Records : Only Related Records</li>
+                            <li>Entity : SLA KPI Instances (Regarding)</li>
+                            <li>Default View : All SLA KPI Instances</li>
+                        </ul>
+                        <li>Click Ok, Save the form then publish</li>
+                    </ol>
+                </div>
+                <!-- Tutorial 2 -->
+                <div class="col-12 pt-5 TutorialContainer" id="wf">
+                    <h3 class="mt-5">Workflows</h3>
+                    <ol>
+                        <li>Go to settings > process</li>
+                        <li>Click New to create a new workflow</li>
+                        <li>Choose in category Workflow</li>
+                        <li>Choose the required entity and a descriptive process name</li>
+                        <li>Choose the triggering event for the workflow</li>
+                        <li>Configure steps for the workflow</li>
+                        <li>Add steps for the workflow to configure the required behaviour</li>
+                        <ul>
+                            <li>Check condition</li>
+                            <li>Wait Condition</li>
+                            <li>Create, Update, Assign Or Delete Record</li>
+                            <li>Start Child workflow</li>
+                            <li>Change Status</li>
+                            <li>Perform Action</li>
+                        </ul>
+                    </ol>
+                </div>
+                <!-- Tutorial 2 -->
+                <div class="col-12 pt-5 TutorialContainer" id="bpf">
+                    <h3 class="mt-5">Business Process Flow</h3>
+                    <ol>
+                        <li>Go to settings > process</li>
+                        <li>Click New to create a new business process flow</li>
+                        <li>Choose in category business process flow</li>
+                        <li>Choose the required entity and a descriptive process name</li>
+                        <li>Use Stages and check conditions to structure the main flow of the entity</li>
+                        <p>Each stage act as a container for steps inside it, either it is steps for filling required data or action steps made on stage triggers (stage entry/stage leave)</p>
+                        <li>Create the required behaviour using the components</li>
+                    </ol>
+                </div>
+                <!-- Tutorial 3 -->
+                <div class="col-12 pt-5 TutorialContainer" id="act">
+                    <h3 class="mt-5">Actions</h3>
+                    <ol>
+                        <li>Go to settings > process</li>
+                        <li>Click New to create a new Action</li>
+                        <li>Choose in category Action</li>
+                        <li>Choose the required entity and a descriptive process name</li>
+                        
+                    </ol>
+                </div>
+                <!-- Tutorial 4 -->
+                <div class="col-12 pt-5 TutorialContainer" id="busrule">
+                    <h3 class="mt-5">Business Rule</h3>
+                    <ol>
+                        <li>Go to the form that you wish to add the business rule too</li>
+                        <li>From the top bar click on business rule</li>
+                        <li>From the right window at the bottom click on New Business Rule</li>
+                        <li>Use the components to configure the required behaviour</li>
+                        <ul>
+                            <li>Check Condition</li>
+                            <li>Lock / Unlock</li>
+                            <li>Set Visibility</li>
+                            <li>Set Field Value</li>
+                        </ul>
+                    </ol>
+                </div>
+                <!-- Tutorial 5 -->
+                <div class="col-12 pt-5 TutorialContainer" id="webjs">
+                    <h3 class="mt-5">Web Resources - JS</h3>
+                    <ol>
+                        
+                    </ol>
+                </div>
+                <!-- Tutorial 6 -->
+                <div class="col-12 pt-5 TutorialContainer" id="secrole">
+                    <h3 class="mt-5">Security Roles</h3>
+                    <ol>
+                        
+                    </ol>
+                </div>
+                <!-- Tutorial 7 -->
+                <div class="col-12 pt-5 TutorialContainer" id="doctemp">
+                    <h3 class="mt-5">Document Templates</h3>
+                    <ol>
+                        
+                    </ol>
+                </div>
+                <!-- Tutorial 8 -->
+                <div class="col-12 pt-5 TutorialContainer" id="routers">
+                    <h3 class="mt-5">Routing Rule Set</h3>
+                    <ol>
+                        <li>From Settings > Service Managment > Routing Rule Set</li>
+                        <li>From the top bar click new</li>
+                        <li>Choose a descriptive name for the RRS</li>
+                        <li>Click Save</li>
+                        <li>From the Rule item subgrid click on the plus icon</li>
+                        <img class="tutImg" src="media/csharp/rrs01.png" alt="">
+                        <li>Choose a descriptive name for the RRS item</li>
+                        <li>Choose a condition for the routing from the top section</li>
+                        <li>Choose a routing team or queue</li>
+                        <li>Activate the RRS</li>
+                    </ol>
+                </div>              
+                
+                <footer>
+                    <div class="container copyright">
+                        <p class="text-secondary">
+                            © 2023 Collaborators. All rights reserved.
+                            The materials in this GitHub repository, including tutorials for CRM Dynamics and custom functions, are intended solely for educational purposes. This collaborative effort involves the contributions of the following individuals:
+                        </p>
+                        <ul class="text-secondary">
+                            <li>Hamed Serag - eng.hamedserag@gmail.com</li>
+                        </ul>
+                        <p class="text-secondary">
+                            You are free to use, modify, and distribute these materials for non-commercial and educational purposes, with proper attribution to the original source and acknowledgment of the collaborative contributors. However, the materials are provided "as-is," without any warranty or support. Hamed Serag and the collaborators shall not be liable for any damages or issues arising from the use of these materials.
+                            For commercial use or any inquiries regarding permissions beyond the scope of this license, please contact on of the collaborators.
+                        </p>        
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="prism/prism.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</html>

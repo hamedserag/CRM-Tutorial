@@ -29,7 +29,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">Out Of Box</a>
+                <a class="nav-link" href="outOfBox.html">Out Of Box</a>
               </li>
             <li class="nav-item">
               <a class="nav-link" href="DynamicJSFuncs.html">Dyn JS</a>
@@ -51,8 +51,8 @@
                     <li class="navItem"><a href="csharp.html#customAction">Custom Action</a></li>
                     <li class="navItem"><a href="csharp.html#RESTApi">REST Api</a></li>
                     <li class="navItem"><a href="csharp.html#SOAPApi">SOAP Api</a></li>
+                    <li class="navItem"><a href="csharp.html#apiIIS">Host Api On IIS</a></li>
                 </ol>
-
             </div>
             <div class="col-3"><!-- Place Holder --></div>         
             <div class="col-9 mt-5">
@@ -298,6 +298,24 @@ public class CodeActivityTutorial : CodeActivity
                         <li>Right Click project > Add WSDL</li>
                         <li>Paste the single WSDL <span class="important">Ex : http://localhost:52684/Service.svc?singleWsdl</span> or upload the WSDL file that we created</li>
                         <li>Test your endpoints</li>
+                    </ol>
+                </div>
+                <!-- Tutorial 7 -->
+                <div class="col-12 pt-5 TutorialContainer" id="apiIIS">
+                    <h3 class="mt-5">Host API on IIS</h3>
+                    <ol>
+                        <li>First Turn on IIS by typing in windows search <span class="important">Turn Windows Features on or off</span></li>
+                        <li>Find <span class="important">Internet Information Service</span></li>
+                        <li>Type in windows search IIS, and open the IIS</li>
+                        <img class="tutImg" src="media/csharp/iis01.png" alt="">
+                        <li>From the left panel right click sites and click <span class="important">Add Website</span></li>
+                        <img class="tutImg" src="media/csharp/iis02.png" alt="">
+                        <li>Choose a site name, site location and a <mark class="important">Unique</mark> hosting port</li>
+                        <img class="tutImg" src="media/csharp/iis03.png" alt="">
+                        <li>Build Your API Solution and copy all the files to the hosted directory <a href="resources/REST API.rar" download>Sample : Ready For Hosting Solution</a> </li>
+                        <li>Click on your site from left panel then from the right panel click browse </li>
+                        <p class="text-secondary">or simply navigate to the local host link <a href="http://localhost:80/">http://localhost:80</a> and change the port with your own</p>
+                        <img class="tutImg" src="media/csharp/iis04.png" alt="">
                     </ol>
                 </div>
                 <footer>
