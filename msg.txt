@@ -1,0 +1,30 @@
+
+### WARNING ###
+THIS IS ALRAJHI BANK PRIVATE COMPUTER SYSTEM
+This system is for the use of authorized clients only.
+Individuals using the computer network system without
+authorization, or in excess of their authorization, are
+subject to having all their activity on this computer
+network system monitored and recorded by system
+personnel.  To protect the computer network system from
+unauthorized use and to ensure the computer network systems
+is functioning properly, system administrators monitor this
+system.  Anyone using this computer network system
+expressly consents to such monitoring and is advised that
+if such monitoring reveals possible conduct of criminal
+activity, system personnel may provide the evidence of
+such activity to law enforcement officials##
+NOTE: As a part of minimum Information Security requirements, effective from 1-Sepetember-2021, your system will be auto checked for the below applications and operating systems requirement.
+Non-compliant systems will be blocked.
+
+IE Version:  11.0.120 or higher
+Google Chrome Version: 74.0.3729.169 or higher
+Mozilla FireFox Version: 67.0 or higher
+Microsoft Edge: 44.17763.1.0 or higher
+
+Operating System Version:
+Windows 10
+
+## To update your system to latest applications/operating system, CONTACT Al Rajhi Service Desk ##
+
+For any issues, kindly contact  "NOC@alrajhibank.com.sa"
